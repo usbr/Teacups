@@ -6,13 +6,15 @@ This codebase generates the program that builds USBR-style teacup graphics. Adap
 
 **Teacup Key**
 
-![teacupKey](https://user-images.githubusercontent.com/8174126/128577770-08f93265-58db-459a-adcb-d994ce3985ab.png)
+![teacupKey](https://user-images.githubusercontent.com/8174126/128890718-22126790-ff16-4427-a37d-9883f30e5f4a.png)
 
 **Individual Teacup**
 
-![LakeMead](https://user-images.githubusercontent.com/8174126/128577569-f4c73be5-0952-493c-99ce-e7e2d937716d.png)
+![LakeMead](https://user-images.githubusercontent.com/8174126/128890789-83031b11-e8b1-44b2-adf0-d1c7b6a40388.png)
+
 
 **Image Overlay**
 
-![usbrTeacups](https://user-images.githubusercontent.com/8174126/128577626-8afdfff1-150e-4367-970c-50ef28887f57.png)
+![Capture](https://user-images.githubusercontent.com/8174126/128890969-5851ef01-f01a-4ceb-9641-24a879025baf.JPG)
+
 
