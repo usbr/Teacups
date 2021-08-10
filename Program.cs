@@ -126,7 +126,7 @@ namespace Teacup
                 }
                 else
                 {
-                    number = (volvalue).ToString("N0") + " ac-ft";
+                    number = (volvalue).ToString("N0") + "";
                     number2 = (avgvalue).ToString("N0") + " ac-ft";
                     Percent = (Math.Max(0.0, Math.Min(volvalue / cfg.capacity, 1.0)) * 100).ToString("F0") + "% Full";
                     Percent2 = (100 * volvalue / avgvalue).ToString("F0") + "% Avg";
@@ -246,7 +246,7 @@ namespace Teacup
                 }
                 else
                 {
-                    number = (volvalue).ToString("N0") + " ac-ft";
+                    number = (volvalue).ToString("N0") + "";
                     number2 = (avgvalue).ToString("N0") + " ac-ft";
                     Percent = (Math.Max(0.0, Math.Min(volvalue / cfg.capacity, 1.0)) * 100).ToString("F0") + "% Full";
                     Percent2 = (100 * volvalue / avgvalue).ToString("F0") + "% Avg";
