@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Text;
 using System.IO;
 using System.Net;
+using PdfSharp;
 
 namespace Teacup
 {
@@ -15,7 +16,23 @@ namespace Teacup
             //Read the config file
             string[] inputItems = System.IO.File.ReadAllLines("teacups.cfg");
             var bmp = BuildTeacupCharts(inputItems);
+
+            // Save image file
             bmp.Save("usbrTeacups.bmp");
+
+            // Save bmp to pdf
+            // Create a new PDF document
+            PdfSharp.Pdf.PdfDocument document = new PdfSharp.Pdf.PdfDocument();
+            // Create an empty page
+            PdfSharp.Pdf.PdfPage page = document.AddPage();
+            page.Orientation = PageOrientation.Landscape;
+            double width = page.Width;
+            double height = page.Height;
+            // Get an XGraphics object for drawing
+            PdfSharp.Drawing.XGraphics gfx = PdfSharp.Drawing.XGraphics.FromPdfPage(page);
+            PdfSharp.Drawing.XImage image = PdfSharp.Drawing.XImage.FromFile("usbrTeacups.bmp");
+            gfx.DrawImage(image, 0, 0, width, height);
+            document.Save("usbrTeacups.pdf");
         }
 
         /// <summary>
