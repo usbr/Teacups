@@ -10,6 +10,8 @@ namespace Teacup
     static class Program
     {    
         static string mainDataFile;
+        static bool plotPercentiles = true;
+        static bool useOnlineDataFile = true;
         
         static void Main(string[] args)
         {
@@ -64,18 +66,30 @@ namespace Teacup
             }
             // Draw image header
             PointF headerLocation = new PointF(2f, 3f);
-            string headerText = "\t\t\t\tCurrent Reservoir Storage as of " + DateTime.Now.AddDays(-1).Date.ToString("MMMM d, yyyy") + 
-                "\n\t\t\t\tMajor Reclamation Reservoirs";
+            string headerText = "\t\t\t" + new string(' ', 10) + "Current Reservoir Storage as of " +
+                DateTime.Now.AddDays(-1).Date.ToString("MMMM d, yyyy") + "\n\t\t\t" +
+                new string(' ', 10) + "Major Reclamation Reservoirs";
             Font headerFont = new Font("SegoeUI", 62, FontStyle.Bold);
             using (Graphics graphics = Graphics.FromImage(bmp))
             {
                 graphics.FillRectangle(Brushes.Transparent, new Rectangle(0, 0, 100, 20));
-                graphics.DrawString(headerText, headerFont, Brushes.White, headerLocation);
+                graphics.DrawString(headerText, headerFont, Brushes.White, headerLocation);                
             }
 
-            // Get DataFile from USBR public web
-            var dataURL = "https://www.usbr.gov/lc/region/g4000/riverops/webreports/dailyDroughtReservoirData.txt";
-            mainDataFile = (new WebClient()).DownloadString(dataURL);
+            // Get DataFile 
+            if (useOnlineDataFile)
+            { //from USBR public web
+                var dataURL = "https://www.usbr.gov/lc/region/g4000/riverops/webreports/dailyDroughtReservoirData.txt";
+                mainDataFile = (new WebClient()).DownloadString(dataURL);
+            }
+            else
+            { //from same directory
+                string fileName = "dailyDroughtReservoirData.csv";
+                if (File.Exists(fileName))
+                {
+                    mainDataFile = File.ReadAllText(fileName);
+                }
+            }            
 
             //Main loop of the program
             for (int i = 0; i < lines.Length; i++)
@@ -331,8 +345,12 @@ namespace Teacup
                     graphics.FillPolygon(blueBrush, fullPoints);
                     // Average line
                     graphics.DrawLine(redPen, point3a, point4a);
-                    graphics.DrawLine(orangePen, point3l, point4l);
-                    graphics.DrawLine(orangePen, point3h, point4h);
+                    // Percentile Lines
+                    if (plotPercentiles)
+                    {
+                        graphics.DrawLine(orangePen, point3l, point4l);
+                        graphics.DrawLine(orangePen, point3h, point4h);
+                    }
                     // Label
                     graphics.DrawString(Text, teacupFont, Brushes.Black, Location, stringFormat);
                 }
